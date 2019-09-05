@@ -15,10 +15,12 @@ const request = "https://api.hgbrasil.com/finance?format=json-cors&key=8703e44a"
 
 void main() async{
 
-
-
   runApp(MaterialApp(
     home: Home(),
+    theme: ThemeData( // thema padrão do app
+      hintColor: Colors.amber,
+      primaryColor: Colors.white
+    ),
   ));
 }
 
@@ -36,6 +38,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  double dolar;
+  double euro;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +73,59 @@ class _HomeState extends State<Home> {
                           textAlign: TextAlign.center ,)
                     );
                   } else{
-                    return Container(color: Colors.green); // não teve erro.
+                      dolar = snapshot.data["results"]["currencies"]["USD"]["buy"];
+                      euro = snapshot.data["results"]["currencies"]["EUR"]["buy"];
+                    return SingleChildScrollView(// não teve erro.
+                      padding: EdgeInsets.all(10), // borda em toda a tela
+                      // Tela com rolamento
+                      child: Column(
+                        crossAxisAlignment:  CrossAxisAlignment.stretch, //centralizar ocupando o maior espaço possivel
+                        children: <Widget>[
+                          Icon(Icons.monetization_on,
+                          size: 150,
+                          color: Colors.amber,),
+                          TextField(
+                            decoration:  InputDecoration(
+                              labelText: "Reais",
+                              labelStyle:  TextStyle(color:  Colors.amber),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),//Colocar borda
+                              prefixText: "R\$ ", // um texto predefinido para mostrar
+                            ),
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontSize: 25
+                            ),
+                          ),
+                          Divider(), // faz uma divisão (espaçamento) entre os dos objetos
+                          TextField(
+                            decoration:  InputDecoration(
+                              labelText: "Dólares",
+                              labelStyle:  TextStyle(color:  Colors.amber),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),//Colocar borda
+                              prefixText: "US\$ ", // um texto predefinido para mostrar
+                            ),
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontSize: 25
+                            ),
+                          ),
+                          Divider(),
+                          TextField(
+                            decoration:  InputDecoration(
+                              labelText: "Euros",
+                              labelStyle:  TextStyle(color:  Colors.amber),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),//Colocar borda
+                              prefixText: "€\$ ", // um texto predefinido para mostrar
+                            ),
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontSize: 25
+                            ),
+                          ),
+                        ],
+                      ),
+
+                    );
                   }
               }
           }),
