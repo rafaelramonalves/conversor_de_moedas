@@ -39,8 +39,32 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  //Controladores
+    final realController = TextEditingController();
+    final dolarController = TextEditingController();
+    final euroController = TextEditingController();
+
   double dolar;
   double euro;
+
+  //Funçoes de alteração dos valores das moedas
+    void _realCharged(String text){
+      double real = double.parse(text);
+      dolarController.text = (real/dolar).toStringAsFixed(2); // a quantidade de digitos
+      euroController.text = (real/euro).toStringAsFixed(2);
+    }
+
+    void _dolarCharged(String text){
+      double dolar = double.parse(text);
+      realController.text = (dolar = this.dolar).toStringAsFixed(2);
+      euroController.text = (dolar = this.dolar/euro).toStringAsFixed(2);
+
+    }
+    void _euroCharged(String text){
+      double euro = double.parse(text);
+      realController.text = (euro * this.euro).toStringAsFixed(2);
+      dolarController.text = (euro * this.euro/dolar).toStringAsFixed(2);
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -84,44 +108,11 @@ class _HomeState extends State<Home> {
                           Icon(Icons.monetization_on,
                           size: 150,
                           color: Colors.amber,),
-                          TextField(
-                            decoration:  InputDecoration(
-                              labelText: "Reais",
-                              labelStyle:  TextStyle(color:  Colors.amber),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),//Colocar borda
-                              prefixText: "R\$ ", // um texto predefinido para mostrar
-                            ),
-                            style: TextStyle(
-                              color: Colors.amber,
-                              fontSize: 25
-                            ),
-                          ),
+                          buildTextField("Reais", "R\$", realController,_realCharged),
                           Divider(), // faz uma divisão (espaçamento) entre os dos objetos
-                          TextField(
-                            decoration:  InputDecoration(
-                              labelText: "Dólares",
-                              labelStyle:  TextStyle(color:  Colors.amber),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),//Colocar borda
-                              prefixText: "US\$ ", // um texto predefinido para mostrar
-                            ),
-                            style: TextStyle(
-                                color: Colors.amber,
-                                fontSize: 25
-                            ),
-                          ),
+                          buildTextField("Dólares", "US\$",dolarController,_dolarCharged),
                           Divider(),
-                          TextField(
-                            decoration:  InputDecoration(
-                              labelText: "Euros",
-                              labelStyle:  TextStyle(color:  Colors.amber),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),//Colocar borda
-                              prefixText: "€\$ ", // um texto predefinido para mostrar
-                            ),
-                            style: TextStyle(
-                                color: Colors.amber,
-                                fontSize: 25
-                            ),
-                          ),
+                          buildTextField("Euros", "€",euroController,_euroCharged),
                         ],
                       ),
 
@@ -131,4 +122,24 @@ class _HomeState extends State<Home> {
           }),
     );
   }
+}
+
+// função para criar os TextField ( nao repetir codigo)
+Widget buildTextField(String label, String prefix,
+    TextEditingController textEditingController, Function alteraTextField){
+ return TextField(
+   controller: textEditingController, // passando o controlador
+   decoration:  InputDecoration(
+     labelText: label,
+     labelStyle:  TextStyle(color:  Colors.amber),
+     enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),//Colocar borda
+     prefixText: prefix, // um texto predefinido para mostrar
+   ),
+   style: TextStyle(
+       color: Colors.amber,
+       fontSize: 25
+   ),
+   onChanged: alteraTextField, // toda vez que tiver alteração no campo ele vai chamar a função
+   keyboardType: TextInputType.number, // irá aparecer o teclado de número
+ );
 }
