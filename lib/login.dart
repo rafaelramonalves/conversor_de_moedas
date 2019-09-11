@@ -1,5 +1,7 @@
+import 'package:conversor_de_moedas/TelaPrincipal.dart' as prefix0;
 import 'package:flutter/material.dart';
 import 'progress_button.dart';
+import 'TelaPrincipal.dart';
 
 void main(){
   runApp(MaterialApp(
@@ -25,17 +27,19 @@ class _telaLoginState extends State<telaLogin> {
         backgroundColor: Colors.amber,
         centerTitle: true,
       ),
-      body:Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Icon(Icons.account_circle,color: Colors.amber,size: 200,),
-          Divider(),
-          campoDigitavel("Usuario: ",_login),
-          Divider(),
-          campoDigitavel("Senha: ",_senha),
-          Divider(),
-          ProgressButton(),
-        ],
+      body:SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.account_circle,color: Colors.amber,size: 200,),
+            Divider(),
+            campoDigitavel("Usuario: ",_login),
+            Divider(),
+            campoDigitavel("Senha: ",_senha),
+            Divider(),
+            ProgressButton(),
+          ],
+        ),
       )
     );
   }
