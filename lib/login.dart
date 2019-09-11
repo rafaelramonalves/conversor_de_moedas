@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'progress_button.dart';
 
-/*void main(){
+void main(){
   runApp(MaterialApp(
     home: telaLogin(),
   ));
-}*/
+}
 
 class telaLogin extends StatefulWidget {
   @override
@@ -12,6 +13,10 @@ class telaLogin extends StatefulWidget {
 }
 
 class _telaLoginState extends State<telaLogin> {
+
+  final _login = TextEditingController();
+  final _senha = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +25,35 @@ class _telaLoginState extends State<telaLogin> {
         backgroundColor: Colors.amber,
         centerTitle: true,
       ),
+      body:Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Icon(Icons.account_circle,color: Colors.amber,size: 200,),
+          Divider(),
+          campoDigitavel("Usuario: ",_login),
+          Divider(),
+          campoDigitavel("Senha: ",_senha),
+          Divider(),
+          ProgressButton(),
+        ],
+      )
     );
   }
+
+  Widget campoDigitavel(String label, TextEditingController textEditingController) {
+    return TextField(
+      controller: textEditingController,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.amber),
+        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.amber)),//Colocar borda
+      ),
+      style: TextStyle(
+          color: Colors.amber,
+          fontSize: 25,
+      ),
+    );
+  }
+
+
 }

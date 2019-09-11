@@ -14,7 +14,7 @@ import 'dart:convert'; //Conversão do texto que chega para JSON
 
 const request = "https://api.hgbrasil.com/finance?format=json-cors&key=8703e44a";
 
-void main() async{
+/*void main() async{
 
   runApp(MaterialApp(
     home: Home(),
@@ -23,7 +23,7 @@ void main() async{
       primaryColor: Colors.white
     ),
   ));
-}
+}*/
 
 Future<Map> getData() async{ // Função que retorna dados no futuro
 

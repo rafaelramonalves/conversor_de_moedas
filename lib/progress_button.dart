@@ -12,7 +12,7 @@ class ProgressButton extends StatefulWidget{
 
 class _progressButtonState extends State<ProgressButton> with SingleTickerProviderStateMixin {
   bool _isPressed = false;
-  int state; // para animação
+  int state =0; // para animação
   double width = double.infinity;
   Animation _animation;
   GlobalKey globalKey = GlobalKey();
@@ -28,7 +28,7 @@ class _progressButtonState extends State<ProgressButton> with SingleTickerProvid
           height: 48,
           width: width,
           child: RaisedButton(
-            padding: EdgeInsets.all(0.0),//fazer o circulo rodar em todo o botão
+            padding: EdgeInsets.all(0.0),//fazer o circulo rodar em todo o botao
             color: state ==2 ? Colors.green : Colors.blue,
             child: buildButtonChild(), // botão circular girando
             onHighlightChanged: (isPressed) {
