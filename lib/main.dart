@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:conversor_de_moedas/progress_button.dart';
 
 import 'package:http/http.dart' as http; //Para fazer as requisições
 
@@ -83,10 +84,16 @@ class _HomeState extends State<Home> {
                 case ConnectionState.none: // Sem resultado
                 case ConnectionState.waiting: // esperando os dados
                   return Center(
-                    child: Text("Carregando Dados...",
+                    child: Container(
+                      width: 100.0,
+                      height: 100.0,
+                      child: CircularProgressIndicator(
+                        value: null, valueColor: AlwaysStoppedAnimation<Color>(Colors.amber), backgroundColor: Colors.white,)
+                    )
+                   /* Text("Carregando Dados...",
                       style:  TextStyle(color:Colors.amber,
                         fontSize: 25.0),
-                    textAlign: TextAlign.center ,)
+                    textAlign: TextAlign.center ,) */
                   );
                 default: // caso ele obteve alguma coisa
                   if(snapshot.hasError){ // se houve erro
@@ -143,3 +150,4 @@ Widget buildTextField(String label, String prefix,
    keyboardType: TextInputType.number, // irá aparecer o teclado de número
  );
 }
+
